@@ -30,8 +30,15 @@
       overflow-x: hidden;
     }
 
+    body {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
     .hero {
       position: relative;
+      flex: 1;
       width: 100%;
       min-height: 100vh;
       background: url('Assets/Background.jpeg') no-repeat center center / cover;
@@ -45,7 +52,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.45);
+      background: rgba(0, 0, 0, 0.40);
       z-index: 1;
     }
 
@@ -60,12 +67,8 @@
     }
 
     @keyframes floatPulse {
-      0%, 100% {
-        transform: translateY(0) scale(1);
-      }
-      50% {
-        transform: translateY(-30px) scale(1.15);
-      }
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-30px) scale(1.15); }
     }
 
     /* ── Entrance Animations ── */
@@ -79,73 +82,95 @@
     .anim-fade-up-d2 { animation-delay: 0.35s; }
     .anim-fade-up-d3 { animation-delay: 0.55s; }
     .anim-fade-up-d4 { animation-delay: 0.75s; }
+    .anim-fade-up-d5 { animation-delay: 0.95s; }
+    .anim-fade-up-d6 { animation-delay: 1.15s; }
 
     @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .anim-scale-in {
       opacity: 0;
       transform: scale(0.7);
-      animation: scaleIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.95s forwards;
+      animation: scaleIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) 1.2s forwards;
     }
 
     @keyframes scaleIn {
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+      to { opacity: 1; transform: scale(1); }
     }
 
+    /* ── Content ── */
     .content {
       position: relative;
       z-index: 3;
       text-align: center;
-      padding: 2rem;
-      max-width: 780px;
-      width: 100%;
+      padding: 3rem 2.5rem;
+      max-width: 860px;
+      width: 92%;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      background: rgba(0,0,0,0.15);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .bordered {
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 0.75rem 1rem;
     }
 
     .logo {
-      max-width: 220px;
+      max-width: 200px;
       width: 100%;
       height: auto;
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.5rem;
       filter: drop-shadow(0 4px 20px rgba(0,0,0,0.3));
+      transition: filter 0.4s ease;
     }
 
     .logo:hover {
       filter: drop-shadow(0 4px 35px rgba(255,255,255,0.25)) brightness(1.08);
     }
 
+    .heading-gradient {
+      font-family: 'Nevan RUS', serif;
+      font-size: clamp(1.8rem, 6vw, 3.2rem);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: #ffd700;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.35), 0 0 60px rgba(255, 215, 0, 0.15);
+      animation: goldPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes goldPulse {
+      0%, 100% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.35), 0 0 60px rgba(255, 215, 0, 0.15); }
+      50% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.6), 0 0 80px rgba(255, 215, 0, 0.3); }
+    }
+
     h1 {
       font-family: 'Nevan RUS', serif;
-      font-size: clamp(2.8rem, 10vw, 5.5rem);
+      font-size: clamp(2.5rem, 9vw, 4.8rem);
       letter-spacing: 0.06em;
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
       text-transform: uppercase;
       text-shadow: 0 2px 30px rgba(0,0,0,0.35);
     }
 
     .sub {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      font-size: clamp(0.9rem, 2.2vw, 1.1rem);
       font-weight: 400;
-      letter-spacing: 0.35em;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      margin-bottom: 3rem;
       opacity: 0.85;
       position: relative;
       display: inline-block;
-      padding: 0 0.5rem;
     }
 
     .sub::after {
       content: '';
       position: absolute;
-      bottom: -6px;
+      bottom: -4px;
       left: 50%;
       transform: translateX(-50%);
       width: 0;
@@ -158,13 +183,33 @@
       to { width: 100%; }
     }
 
+    .tagline {
+      font-size: clamp(0.85rem, 1.8vw, 1rem);
+      font-weight: 300;
+      letter-spacing: 0.12em;
+      opacity: 0.7;
+      margin-top: 0.25rem;
+    }
+
+    hr.divider {
+      width: 60px;
+      height: 2px;
+      background: rgba(255,255,255,0.3);
+      border: none;
+      margin: 1.5rem auto;
+      transition: width 0.4s ease;
+    }
+
+    .content:hover hr.divider {
+      width: 100px;
+    }
+
     .contact {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 1rem 2.5rem;
-      margin-bottom: 3rem;
-      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      gap: 0.75rem 2rem;
+      font-size: clamp(0.85rem, 1.8vw, 1rem);
       font-weight: 400;
     }
 
@@ -173,7 +218,7 @@
       text-decoration: none;
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.45rem;
       transition: opacity 0.25s, transform 0.25s;
       position: relative;
     }
@@ -181,7 +226,7 @@
     .contact a::after {
       content: '';
       position: absolute;
-      bottom: -3px;
+      bottom: -2px;
       left: 0;
       width: 100%;
       height: 1px;
@@ -202,8 +247,8 @@
     }
 
     .contact svg {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       fill: currentColor;
       flex-shrink: 0;
       transition: transform 0.3s;
@@ -213,23 +258,67 @@
       transform: scale(1.2);
     }
 
-    /* ── Mascot ── */
-    .mascot {
-      position: fixed;
-      bottom: 0;
-      right: 0;
-      z-index: 4;
-      width: clamp(100px, 18vw, 260px);
-      height: auto;
-      pointer-events: none;
+    /* ── Social ── */
+    .social {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem 2.5rem;
+      font-size: clamp(0.85rem, 1.8vw, 1rem);
+      font-weight: 400;
     }
 
-    @media (max-width: 640px) {
-      .mascot {
-        width: 80px;
-        bottom: 0;
-        right: 0;
-      }
+    .social a {
+      color: #fff;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      transition: opacity 0.25s, transform 0.25s;
+      position: relative;
+    }
+
+    .social a::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: currentColor;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform 0.35s ease;
+    }
+
+    .social a:hover::after {
+      transform: scaleX(1);
+      transform-origin: left;
+    }
+
+    .social a:hover {
+      opacity: 0.8;
+      transform: translateY(-2px);
+    }
+
+    .social svg {
+      width: 22px;
+      height: 22px;
+      fill: currentColor;
+      flex-shrink: 0;
+      transition: transform 0.3s;
+    }
+
+    .social a:hover svg {
+      transform: scale(1.2);
+    }
+
+    /* ── QR Row ── */
+    .qr-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
     }
 
     .barcode-wrap {
@@ -238,7 +327,7 @@
     }
 
     .barcode {
-      max-width: 160px;
+      max-width: 130px;
       width: 100%;
       height: auto;
       opacity: 0.9;
@@ -252,10 +341,10 @@
     }
 
     .barcode-label {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-top: 0.4rem;
+      margin-top: 0.35rem;
       opacity: 0.6;
       transition: opacity 0.3s, letter-spacing 0.3s;
     }
@@ -265,58 +354,63 @@
       letter-spacing: 0.25em;
     }
 
-    hr.divider {
-      width: 60px;
-      height: 2px;
-      background: rgba(255,255,255,0.4);
-      border: none;
-      margin: 0 auto 2.5rem;
-      transition: width 0.4s ease;
+    /* ── Mascot ── */
+    .mascot {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      z-index: 4;
+      width: clamp(100px, 18vw, 260px);
+      height: auto;
+      pointer-events: none;
     }
 
-    .content:hover hr.divider {
-      width: 100px;
-    }
-
-    /* ── Shimmer text accent ── */
-    .shimmer {
-      background: linear-gradient(
-        to right,
-        rgba(255,255,255,0.5) 0%,
-        rgba(255,255,255,0.9) 50%,
-        rgba(255,255,255,0.5) 100%
-      );
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      background-clip: text;
-      -webkit-text-fill-color: transparent;
-      animation: shimmer 3s ease-in-out infinite;
-    }
-
-    @keyframes shimmer {
-      0% { background-position: 200% center; }
-      100% { background-position: -200% center; }
+    /* ── Footer ── */
+    .site-footer {
+      position: relative;
+      z-index: 3;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: clamp(0.8rem, 1.6vw, 0.95rem);
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.55;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 2rem;
     }
 
     @media (max-width: 640px) {
-      .content { padding: 1.5rem; }
-      .logo { max-width: 160px; margin-bottom: 1.8rem; }
-      .contact { flex-direction: column; align-items: center; gap: 0.75rem; }
+      .content { padding: 1.5rem 1rem; width: 95%; }
+      .logo { max-width: 140px; margin-bottom: 1rem; }
+      .contact { flex-direction: column; align-items: center; gap: 0.5rem; }
+      .social { flex-direction: column; align-items: center; gap: 0.5rem; }
+      .qr-row { flex-direction: column; align-items: center; gap: 1.2rem; }
+      .mascot { width: 80px; bottom: 0; right: 0; }
+      .site-footer { padding: 1rem 0.5rem; }
+      .bordered { padding: 0.5rem 0.6rem; }
     }
   </style>
 </head>
 <body>
   <img src="Assets/girl-mascot.png" alt="" class="mascot">
+
   <section class="hero" id="hero">
     <div class="content">
       <img src="Assets/Logo.png" alt="Auralabs Research" class="logo anim-fade-up">
 
-      <h1 class="anim-fade-up anim-fade-up-d1">Coming Soon</h1>
-      <p class="sub anim-fade-up anim-fade-up-d2 shimmer">Peptide Research</p>
+      <div class="anim-fade-up anim-fade-up-d1"><div class="heading-gradient">Home of the $45 RETA</div></div>
 
-      <hr class="divider anim-fade-up anim-fade-up-d2">
+      <h1 class="anim-fade-up anim-fade-up-d2 bordered">Coming Soon</h1>
 
-      <div class="contact anim-fade-up anim-fade-up-d3">
+      <div class="sub anim-fade-up anim-fade-up-d3 bordered">
+        <div>Peptide Research</div>
+        <div class="tagline">Best peptide deals with wholesale pricing</div>
+      </div>
+
+      <hr class="divider anim-fade-up anim-fade-up-d3">
+
+      <div class="contact anim-fade-up anim-fade-up-d4 bordered">
         <a href="mailto:auralabresearch@gmail.com">
           <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
           auralabresearch@gmail.com
@@ -327,10 +421,33 @@
         </a>
       </div>
 
-      <div class="barcode-wrap anim-scale-in">
-        <img src="Assets/Barcode Tiktok.jpeg" alt="TikTok QR Code" class="barcode">
-        <p class="barcode-label">Follow us on TikTok</p>
+      <div class="social anim-fade-up anim-fade-up-d5 bordered">
+        <a href="https://www.tiktok.com/@auralabs.research" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.07 4.61A4.26 4.26 0 0019.2 2.8h-2.5a4.24 4.24 0 01-1.63 3.34v7.89a3.77 3.77 0 11-2.23-3.44v-2.6a6.28 6.28 0 105.23 6.17V4.61z"/></svg>
+          @auralabs.research
+        </a>
+        <a href="https://instagram.com/auralabs.research" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 2.19.1 3.29.87 3.97 1.73.67.82 1.04 1.9 1.14 4 .05 1.18.07 1.57.07 4.04s-.02 2.86-.07 4.04c-.1 2.1-.47 3.18-1.14 4-.68.86-1.78 1.63-3.97 1.73-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-2.19-.1-3.29-.87-3.97-1.73-.67-.82-1.04-1.9-1.14-4-.05-1.18-.07-1.57-.07-4.04s.02-2.86.07-4.04c.1-2.1.47-3.18 1.14-4 .68-.86 1.78-1.63 3.97-1.73C8.42 2.17 8.8 2.16 12 2.16zm0 1.78c-3.17 0-3.55.01-4.8.06-2.01.1-3.02.87-3.62 1.6-.64.78-.98 1.87-1.07 3.82-.04 1.14-.06 1.5-.06 4.58s.02 3.44.06 4.58c.09 1.95.43 3.04 1.07 3.82.6.73 1.61 1.5 3.63 1.6 1.25.05 1.63.06 4.79.06s3.54-.01 4.79-.06c2.02-.1 3.03-.87 3.63-1.6.64-.78.98-1.87 1.07-3.82.04-1.14.06-1.5.06-4.58s-.02-3.44-.06-4.58c-.09-1.95-.43-3.04-1.07-3.82-.6-.73-1.61-1.5-3.63-1.6-1.25-.05-1.63-.06-4.79-.06zm0 3.03a5.2 5.2 0 110 10.4 5.2 5.2 0 010-10.4zm0 1.78a3.42 3.42 0 100 6.84 3.42 3.42 0 000-6.84zm5.2-.27a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"/></svg>
+          @auralabs.research
+        </a>
+        <a href="https://wa.me/12139488777" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.47 6.52a7.89 7.89 0 00-11.16.1 7.89 7.89 0 00-1.79 8.5l-1.26 4.6 4.73-1.23a7.89 7.89 0 008.5-1.8 7.9 7.9 0 001.01-10.12l.01-.05zm-.85 10.69a6.47 6.47 0 01-7.36 1.33l-.36-.18-2.8.73.75-2.73-.24-.38a6.47 6.47 0 1110-11.72 6.47 6.47 0 011.01 9.95v0zm-5.97-8.19c-.2-.44-.4-.46-.6-.47-.15 0-.33 0-.5 0a.98.98 0 00-.72.34c-.24.28-.93.92-.93 2.24s.95 2.6 1.08 2.78c.14.18 1.86 2.84 4.5 3.98.63.27 1.12.43 1.5.55.63.2 1.2.17 1.65.1.5-.07 1.56-.64 1.78-1.26.22-.62.22-1.14.15-1.26-.07-.12-.26-.2-.55-.34-.28-.14-1.68-.83-1.94-.92-.26-.09-.45-.14-.64.14s-.74.92-.9 1.1c-.17.19-.34.2-.63.07-.28-.14-1.1-.4-2.1-1.3-.77-.7-1.3-1.56-1.45-1.83-.14-.26-.02-.4.1-.54.13-.14.27-.34.4-.52.13-.18.18-.3.26-.5.09-.2.05-.38-.02-.53-.07-.14-.64-1.55-.88-2.12z"/></svg>
+          Chat with us
+        </a>
       </div>
+
+      <div class="qr-row anim-scale-in bordered">
+        <div class="barcode-wrap">
+          <img src="Assets/Barcode Tiktok.jpeg" alt="TikTok QR" class="barcode">
+          <p class="barcode-label">Follow us on TikTok</p>
+        </div>
+        <div class="barcode-wrap">
+          <img src="Assets/Barcode Whatsapp.jpeg" alt="WhatsApp QR" class="barcode">
+          <p class="barcode-label">Scan to chat with supplier</p>
+        </div>
+      </div>
+
+      <div class="site-footer anim-fade-up anim-fade-up-d6 bordered">Quality research results.</div>
     </div>
   </section>
 
